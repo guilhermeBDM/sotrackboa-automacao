@@ -1,4 +1,4 @@
-package br.com.piracanjuba.bean;
+package br.com.sotrackboa.bean;
 
 import java.util.ArrayList;
 
