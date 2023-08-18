@@ -11,22 +11,39 @@ public class loginUsuarioTest
 	@Test
 	public void testLogin() {
         
+		// Definindo o local do chromedriver (a ser melhorado com WebDriverIO)
 		System.setProperty("webdriver.chrome.driver", "C:/webdrivers/chromedriver-win64/chromedriver.exe");
+		
+		// Criação de uma options que força o chrome a inicializar maximizado
 		ChromeOptions options = new ChromeOptions();
 	    options.addArguments("--start-maximized");
 		WebDriver driver = new ChromeDriver(options);
         
+		// .get() é o método que chama o site a ser inicializado com o chrome
         driver.get("https://loja.sotrackboa.com/");
  
-        
-      
-        WebElement userCircle = driver.findElement(By.xpath("//div[@class='minha-conta']//i[contains(@class,'circle-user')]"));
-        WebElement myAccount = driver.findElement(By.xpath("//div[@class='minha-conta']//a[text()='Minha conta']"));
+        // Criação de webElements através de xpath
+        WebElement btnUserCircle = driver.findElement(By.xpath("//div[@class='minha-conta']//i[contains(@class,'circle-user')]"));
+        WebElement btnMyAccount = driver.findElement(By.xpath("//div[@class='minha-conta']//a[text()='Minha conta']"));
 
+        // Criação de uma instância de actions. Actions é utilizado para realizar ações de mouse
         Actions actions = new Actions(driver);
-        actions.moveToElement(userCircle).perform();
-        myAccount.click();
+        
+        //Utilizando actions para realizar a ação de mouse onde o mouse é movido para cima de um objeto
+        actions.moveToElement(btnUserCircle).perform();
+        
+        // click é utilizado para realizar um clique em um botão
+        btnMyAccount.click();
 
+        // Criação de webElements através de ID
+        WebElement txtEmail = driver.findElement(By.id("id_email"));
+        WebElement txtSenha = driver.findElement(By.id("id_senha"));
+        
+      	// sendKeys é o método utilizado para escrever em um campo de texto
+        txtEmail.sendKeys("email");
+        txtSenha.sendKeys("senha");
+
+        //fechando a instancia do driver
         driver.quit();
         
         
