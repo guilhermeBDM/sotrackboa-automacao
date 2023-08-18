@@ -8,8 +8,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import static utils.WaitUtils.waitForElement;
+
+import java.time.Duration;
+
+
 
 public class loginUsuarioTest {
+	
+	
 	private WebDriver driver;
 
 	@Before
@@ -37,19 +45,23 @@ public class loginUsuarioTest {
 
 		// Criação de uma instância de actions. Actions é utilizado para realizar ações de mouse
 		Actions actions = new Actions(driver);
-
 		// Utilizando actions para realizar a ação de mouse onde o mouse é movido para cima de um objeto
 		actions.moveToElement(btnUserCircle).perform();
 
-		// click é utilizado para realizar um clique em um botão
+		//waitForElement é uma função criada na classe WaitUtils do packege utils. A função serve para esperar um elemento existir na tela
+		waitForElement(driver,btnMyAccount);
+		//click é utilizado para realizar um clique em um botão
 		btnMyAccount.click();
 
 		// Criação de webElements através de ID
 		WebElement txtEmail = driver.findElement(By.id("id_email"));
 		WebElement txtSenha = driver.findElement(By.id("id_senha"));
 
+		
+		waitForElement(driver,txtEmail);
 		// sendKeys é o método utilizado para escrever em um campo de texto
 		txtEmail.sendKeys("email");
+		waitForElement(driver,txtSenha);
 		txtSenha.sendKeys("senha");
 
 		// fechando a instancia do driver
